@@ -1,0 +1,99 @@
+create table branch (
+         branch_id number(4),
+				 state varchar2(15) not null,
+         city varchar2(15) not null,
+         has_teller number(1) not null,
+	 PRIMARY KEY (branch_id)
+        );
+
+create table customer (
+	 cust_id number(10),
+	 last_name varchar2(15) not null,
+	 first_name varchar2(15) not null,
+	 PRIMARY KEY (cust_id)
+	);
+
+create table depositor (
+	 cust_id number(10) not null,
+	 acct_id number(10) not null,
+	 PRIMARY KEY (acct_id),
+	 FOREIGN KEY (cust_id) REFERENCES customer (cust_id)
+	);
+
+create table savings_account (
+	 acct_id number(10) not null,
+	 branch_id number(10) not null,
+	 balance number(10,2) not null,
+	 interest_rate number(10,2) not null,
+	 PRIMARY KEY (acct_id),
+	 FOREIGN KEY (branch_id) REFERENCES branch (branch_id)
+	);
+
+create table checking_account (
+	 acct_id number(10) not null,
+	 branch_id number(10) not null,
+	 balance number(10,2) not null,
+	 interest_rate number(10,2) not null,
+	 min_balance number(10,2),
+	 PRIMARY KEY (acct_id),
+	 FOREIGN KEY (branch_id) REFERENCES branch (branch_id)
+	);
+
+create table borrower (
+	 cust_id number(10) not null,
+	 loan_id number(10) not null,
+	 PRIMARY KEY (loan_id),
+	 FOREIGN KEY (cust_id) REFERENCES customer (cust_id)
+	);
+
+create table sec_loan (
+	 loan_id number(10) not null,
+	 interest_rate number(10,2) not null,
+	 amount number(10,2) not null,
+	 monthly_payment number(10, 2) not null,
+	 PRIMARY KEY (loan_id)
+	);
+
+create table unsec_loan (
+	 loan_id number(10) not null,
+	 interest_rate number(10,2) not null,
+	 amount number(10,2) not null,
+	 monthly_payment number(10, 2) not null,
+	 PRIMARY KEY (loan_id)
+	);
+
+create table transaction (
+	 transaction_id number(10) not null,
+	 acct_id number(10) not null,
+	 timestamp varchar2(25) not null,
+	 amount number(10,2),
+	 PRIMARY KEY (transaction_id),
+	 FOREIGN KEY (acct_id) REFERENCES depositor (acct_id)
+	);
+
+create table card_holder (
+	 cust_id number(10) not null,
+	 card_id number(10) not null,
+	 PRIMARY KEY (card_id),
+	 FOREIGN KEY (cust_id) REFERENCES customer (cust_id)
+	);
+
+create table debit_card (
+	 card_id number(10) not null,
+	 acct_id number(10) not null,
+	 PRIMARY KEY (card_id),
+	 FOREIGN KEY (card_id) REFERENCES card_holder (card_id)
+	);
+
+create table credit_card (
+	 card_id number(10) not null,
+	 acct_id number(10) not null,
+	 interest_rate number(10,2) not null,
+	 limit number(10,2) not null,
+	 balance number(10,2) not null,
+	 balance_due number(10,2) not null,
+	 FOREIGN KEY (card_id) REFERENCES card_holder (card_id)
+	);
+	 
+
+	 
