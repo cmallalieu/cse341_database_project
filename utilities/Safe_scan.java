@@ -1,4 +1,4 @@
-package controller;
+package utilities;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -30,8 +30,28 @@ public class Safe_scan {
     return input;
   }
 
+  public int next_positive_int_safe () {
+    
+    System.out.println("Please enter a positive integer: ");
+    int input = 0;
+    try 
+    {
+        input = this.scan.nextInt();
+        if (input < 1)
+        {
+          next_positive_int_safe();
+        }
+    } 
+    catch (InputMismatchException ex) 
+    {
+        Ex_handler.handle_input_mismatch(ex, "int");
+        this.scan.next();
+        return next_int_safe();
+    }
+    return input;
+  }
+
   public String next_string_safe() {
-    System.out.println("Please enter a word");
     return this.scan.next();
   }
 

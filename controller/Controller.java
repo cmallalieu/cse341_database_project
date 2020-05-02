@@ -1,16 +1,10 @@
+package controller;
+
 import java.io.*;
-import controller.Safe_scan;
+import java.sql.*;
+
 
 public class Controller {
-  public static void main (String[] arg) {
-
-    Safe_scan scan = new Safe_scan();
-
-    double username = scan.next_positive_double_safe();
-    double password = scan.next_positive_double_safe();
-
-    System.out.println(username);
-    System.out.println(password);
     // // establish connection and get query string
     // Connection con = ensure_connection();
     // String query_str = get_dept_query();
@@ -58,7 +52,7 @@ public class Controller {
     //   query.close();
     //   con.close();
     // }
-  }
+  //}
 
   /*
   * METHODS FOR GETTING USER INPUT

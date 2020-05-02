@@ -66,6 +66,7 @@ create table transaction (
 	 transaction_id number(10) not null,
 	 acct_id number(10) not null,
 	 timestamp varchar2(25) not null,
+	 vender_name carchar2(25) not null,
 	 amount number(10,2),
 	 PRIMARY KEY (transaction_id),
 	 FOREIGN KEY (acct_id) REFERENCES depositor (acct_id)

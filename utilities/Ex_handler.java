@@ -1,4 +1,4 @@
-package controller;
+package utilities;
 
 import java.lang.ClassNotFoundException;
 import java.sql.SQLException;
@@ -15,7 +15,11 @@ public class Ex_handler {
     {
       // get and print possibly many error messages
       String errMsg = ex.getMessage();
-      System.out.println("SQL Error Message: " + errMsg);
+      if (errMsg.contains("ORA-01017"))
+      {
+        System.out.println("Invalid Username/Password");
+      }
+ 
 
       // uncomment for debugging
       //e.printStackTrace();
